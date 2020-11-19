@@ -21,6 +21,7 @@ class LatestBooks extends React.Component {
       categorySelected: 'fantasy',
     }
   }
+  
   handleDropdownChange = (category) => {
     this.setState({ data: books[category], categorySelected: category })
   }
