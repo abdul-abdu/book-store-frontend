@@ -1,24 +1,20 @@
-import { Modal, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 
-const CommentArea = (props) => {
+const CommentArea = ({ showComment, onClick }) => {
+  const showHiddenClassName = showComment ? 'modal display-block' : 'modal display-none'
+  console.log('showComment', showComment)
+  console.log('hideCommentArea', onClick)
   return (
-    <Modal.Dialog>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
-      </Modal.Header>
+    <main>
+      <div className={showHiddenClassName}>
+        <section className='modal-main'>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam commodi nihil at eos voluptates minus omnis, dolor consequuntur recusandae voluptatibus error architecto atque facere sed nemo itaque laudantium optio magni.</p>
+          <Button onClick={onClick}>close</Button>
+        </section>
+      </div>
 
-      <Modal.Body>
-        <p>Modal body text goes here.</p>
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary">Save changes</Button>
-      </Modal.Footer>
-    </Modal.Dialog>
+    </main >
   )
 }
-
-
 export default CommentArea
