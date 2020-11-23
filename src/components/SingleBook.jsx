@@ -9,10 +9,14 @@ class SingleBook extends React.Component {
   render() {
     return (
       <Card style={{ width: '13rem' }}>
-        <Card.Img variant="top" src={this.props.book.img} />
+        <div className='card-img-box'>
+          <Card.Img variant="top" src={this.props.book.img} />
+        </div>
         <Card.Body>
-          <Card.Title>{this.props.book.title}</Card.Title>
-          <Card.Text>$ {this.props.book.price}</Card.Text>
+          <div className='card-tex-box'>
+            <Card.Title>{this.props.book.title}</Card.Title>
+            <Card.Text>$ {this.props.book.price}</Card.Text>
+          </div>
           <Button className='my-1' variant="outline-warning">Buy Now</Button>
           <Button
             variant="outline-info"

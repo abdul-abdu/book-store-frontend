@@ -20,7 +20,7 @@ class NavBar extends React.Component {
             aria-describedby="basic-addon1"
             onChange={(e) => this.props.handleSearchQuery(e.target.value)}
           />
-          <DropdownButton className='ml-2' id="dropdown-basic-button" title={this.props.Ddowntitle.toUpperCase()}>
+          <DropdownButton variant="outline-secondary" className='ml-2' id="dropdown-basic-button" title={this.props.Ddowntitle.toUpperCase()}>
             {BookCategories.map((category, idx) => {
               return (
                 <Dropdown.Item href="#/action-1"

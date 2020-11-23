@@ -10,10 +10,10 @@
   background-color: #040404;
 }
 
+/* Cards */
 .App .card {
   color: white;
   background-color: #181818;
-  height: 550px;
 }
 
 .App .card button {
@@ -25,6 +25,16 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.card-img-box {
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-tex-box {
+  height: 100px;
+  
 }
 
 /* ******************* MODAL **************** */
