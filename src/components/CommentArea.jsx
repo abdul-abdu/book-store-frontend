@@ -1,17 +1,50 @@
-import { Button } from 'react-bootstrap'
+import { Button, Spinner, Container, Row, Col } from 'react-bootstrap'
 
 
-const CommentArea = ({ showComment, onClick }) => {
+const CommentArea = ({ showComment, onClick, bookInfo }) => {
   const showHiddenClassName = showComment ? 'modal display-block' : 'modal display-none'
-  console.log('showComment', showComment)
-  console.log('hideCommentArea', onClick)
+
   return (
     <main>
       <div className={showHiddenClassName}>
-        <section className='modal-main'>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam commodi nihil at eos voluptates minus omnis, dolor consequuntur recusandae voluptatibus error architecto atque facere sed nemo itaque laudantium optio magni.</p>
-          <Button onClick={onClick}>close</Button>
-        </section>
+        <Container className='modal-main text-dark'>
+          {bookInfo ? (
+
+            <>
+              <Row className=''>
+                <Col><img src={bookInfo.img} alt="Girl in a jacket" width="150px" height="200px" /></Col>
+                <Col>
+                  <Button className='mx-1'>Add Comment</Button>
+                  <Button className='mx-1'>Comment List</Button>
+                </Col>
+              </Row>
+
+            </>
+
+          ) : (
+              <Button variant="primary" disabled className='mx-1'>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                  Loading...
+              </Button>
+            )}
+
+          <Row>
+            <Col>
+              <Button
+                className='my-2 mx-1'
+                variant="outline-info"
+                onClick={onClick}>
+                Close
+               </Button>
+            </Col>
+          </Row>
+        </Container>
       </div>
 
     </main >

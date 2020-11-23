@@ -47,6 +47,10 @@
   transform: translate(-50%, -50%);
 }
 
+.modal-main button {
+  width: 150px;
+}
+
 .display-block {
   display: block;
 }

@@ -24,7 +24,12 @@ class LatestBooks extends React.Component {
       data: books.fantasy,
       categorySelected: 'fantasy',
       showComment: false,
+      bookInfo: null,
     }
+  }
+
+  callbackFunction = (bookInfo) => {
+    this.setState({ bookInfo: bookInfo })
   }
 
   showCommentArea = () => {
@@ -65,10 +70,18 @@ class LatestBooks extends React.Component {
           handleDropdownChange={this.handleDropdownChange}
           handleSearchQuery={this.handleSearchQuery}
         />
-        <CommentArea showComment={this.state.showComment} onClick={this.hideCommentArea} />
+        <CommentArea
+          showComment={this.state.showComment}
+          onClick={this.hideCommentArea}
+          bookInfo={this.state.bookInfo}
+        />
         <Container>
           <Row xs={1} sm={2} md={3} lg={4} xl={5}>
-            <BookList listOfBooks={this.state.data} onClick={this.showCommentArea} />
+            <BookList
+              listOfBooks={this.state.data}
+              onClick={this.showCommentArea}
+              parentCallback={this.callbackFunction}
+            />
           </Row>
         </Container>
       </>
