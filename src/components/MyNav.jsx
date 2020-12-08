@@ -1,5 +1,7 @@
 import React from 'react'
-import { Navbar, Nav, FormControl, DropdownButton, Dropdown, Container } from 'react-bootstrap'
+import { Navbar, Nav, FormControl, DropdownButton, Dropdown, Container, Badge } from 'react-bootstrap'
+
+const { FiShoppingCart } = require('react-icons/fi')
 
 const BookCategories = ['fantasy', 'history', 'romance', 'scifi', 'horror']
 
@@ -10,9 +12,10 @@ class NavBar extends React.Component {
         <Container>
           <Navbar.Brand href="#home">StriveBookStore</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#home">
+              <FiShoppingCart /> Basket
+              <Badge variant="danger">c</Badge>
+            </Nav.Link>
           </Nav>
           <FormControl
             placeholder="Search"
