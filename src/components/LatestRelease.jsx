@@ -12,7 +12,6 @@ import NavBar from './MyNav'
 // Importing React components
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import CommentArea from './CommentArea'
 
 // const BookCategories = ['fantasy', 'history', 'romance', 'scifi', 'horror']
 const books = { fantasy, history, romance, scifi, horror, }
@@ -70,17 +69,11 @@ class LatestBooks extends React.Component {
           handleDropdownChange={this.handleDropdownChange}
           handleSearchQuery={this.handleSearchQuery}
         />
-        <CommentArea
-          showComment={this.state.showComment}
-          onClick={this.hideCommentArea}
-          bookInfo={this.state.bookInfo}
-        />
         <Container>
           <Row xs={1} sm={2} md={3} lg={4} xl={5}>
             <BookList
               listOfBooks={this.state.data}
               onClick={this.showCommentArea}
-              parentCallback={this.callbackFunction}
             />
           </Row>
         </Container>

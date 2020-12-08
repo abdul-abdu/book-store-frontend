@@ -1,18 +1,16 @@
 import SingleBook from './SingleBook'
-import { Col } from 'react-bootstrap'
 import React from 'react'
+const { Col } = require('react-bootstrap')
 
-
-// { listOfBooks, onClick }
 class BookList extends React.Component {
-  
-  
+
+
   render() {
     return (
       this.props.listOfBooks.map((book) => {
         return (
           <Col className='my-2' key={book.asin}>
-            <SingleBook book={book} onClick={this.props.onClick} grandCallback={this.props.parentCallback} />
+            <SingleBook book={book} />
           </Col>
         )
       })
