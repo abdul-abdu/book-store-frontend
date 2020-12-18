@@ -1,14 +1,22 @@
-import React from 'react'
-import { Navbar, Nav, FormControl, DropdownButton, Dropdown, Container, Badge } from 'react-bootstrap'
+import React from "react"
+import {
+  Navbar,
+  Nav,
+  FormControl,
+  DropdownButton,
+  Dropdown,
+  Container,
+  Badge,
+} from "react-bootstrap"
 
-const { FiShoppingCart } = require('react-icons/fi')
+const { FiShoppingCart } = require("react-icons/fi")
 
-const BookCategories = ['fantasy', 'history', 'romance', 'scifi', 'horror']
+const BookCategories = ["fantasy", "history", "romance", "scifi", "horror"]
 
 class NavBar extends React.Component {
   render() {
     return (
-      <Navbar className='fixed-top' variant="dark" >
+      <Navbar className="fixed-top" variant="dark">
         <Container>
           <Navbar.Brand href="#home">StriveBookStore</Navbar.Brand>
           <Nav className="mr-auto">
@@ -21,12 +29,17 @@ class NavBar extends React.Component {
             placeholder="Search"
             aria-label="Search"
             aria-describedby="basic-addon1"
-            onChange={(e) => this.props.handleSearchQuery(e.target.value)}
+            // onChange={(e) => this.props.handleSearchQuery(e.target.value)}
           />
-          <DropdownButton variant="outline-secondary" className='ml-2' id="dropdown-basic-button" title={this.props.Ddowntitle.toUpperCase()}>
+          <DropdownButton
+            variant="outline-secondary"
+            className="ml-2"
+            id="dropdown-basic-button"
+            title="ssk"
+          >
             {BookCategories.map((category, idx) => {
               return (
-                <Dropdown.Item href="#/action-1"
+                <Dropdown.Item
                   key={idx}
                   onClick={() => {
                     if (category !== this.props.Ddowntitle) {
@@ -44,6 +57,5 @@ class NavBar extends React.Component {
     )
   }
 }
-
 
 export default NavBar

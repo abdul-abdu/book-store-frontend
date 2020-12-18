@@ -6,22 +6,21 @@ import romance from "../data/romance.json"
 import scifi from "../data/scifi.json"
 
 // Importing custon components
-import BookList from './BookList'
-import NavBar from './MyNav'
+import BookList from "./BookList"
 
 // Importing React components
-import React from 'react'
-import { Container, Row } from 'react-bootstrap'
+import React from "react"
+import { Container, Row } from "react-bootstrap"
 
 // const BookCategories = ['fantasy', 'history', 'romance', 'scifi', 'horror']
-const books = { fantasy, history, romance, scifi, horror, }
+const books = { fantasy, history, romance, scifi, horror }
 
 class LatestBooks extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       data: books.fantasy,
-      categorySelected: 'fantasy',
+      categorySelected: "fantasy",
       showComment: false,
       bookInfo: null,
     }
@@ -32,7 +31,7 @@ class LatestBooks extends React.Component {
   }
 
   handleSearchQuery = (saerchQuery) => {
-    const category = this.state.categorySelected;
+    const category = this.state.categorySelected
 
     if (saerchQuery) {
       const filtredBooks = books[category].filter((book) =>
@@ -51,11 +50,11 @@ class LatestBooks extends React.Component {
         <br />
         <br />
         <br />
-        <NavBar
+        {/* <NavBar
           Ddowntitle={this.state.categorySelected}
           handleDropdownChange={this.handleDropdownChange}
           handleSearchQuery={this.handleSearchQuery}
-        />
+        /> */}
         <Container>
           <Row xs={2} sm={2} md={3} lg={4} xl={5}>
             <BookList
@@ -65,10 +64,8 @@ class LatestBooks extends React.Component {
           </Row>
         </Container>
       </>
-
     )
   }
 }
-
 
 export default LatestBooks
