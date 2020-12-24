@@ -12,22 +12,18 @@ class BookList extends Component {
   }
 
   componentDidMount = () => {
+    console.log("refresh")
     this.refreshList()
   }
 
   refreshList = async () => {
     try {
-      const url =
-        process.env.NODE_ENV === "production"
-          ? process.env.BE_URL_PROD
-          : process.env.BE_URL_DEV
-      console.log("process.env.NODE_ENV", process.env.NODE_ENV)
-      console.log("process.env.BE_URL_DEV", process.env.BE_URL_DEV)
-      console.log("process.env.BE_URL_PROD", process.env.BE_URL_PROD)
-
-      console.log("url->>>>>>>>>>>>>>", url)
+      const url = process.env.BE_URL
+      console.log("url", url)
       const request = await fetch("http://localhost:3001/books")
+      console.log(request)
       const books = await request.json()
+      console.log(books)
       this.setState({ books: books, loading: false })
     } catch (error) {
       console.log(error)
@@ -44,9 +40,9 @@ class BookList extends Component {
               <Spinner animation="border" />
             </Col>
           ) : (
-            books.map((book) => {
+            books.map((book, idx) => {
               return (
-                <Col className="my-2" key={book.asin}>
+                <Col className="my-2" key={idx}>
                   <SingleBook book={book} />
                 </Col>
               )

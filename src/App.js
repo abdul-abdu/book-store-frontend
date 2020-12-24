@@ -1,6 +1,6 @@
 import "./App.css"
 import MyFooter from "./components/MyFooter"
-import Booklist from "./components/BookList"
+import BookList from "./components/BookList"
 import NavBar from "./components/NavBar"
 // import LatestRelease from "./components/LatestRelease"
 
@@ -13,7 +13,7 @@ function App() {
       <br />
       <br />
       {/* <LatestRelease /> */}
-      <Booklist />
+      <BookList />
       <MyFooter />
     </div>
   )

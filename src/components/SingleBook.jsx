@@ -1,9 +1,9 @@
-import { Card, Button } from "react-bootstrap";
-import React from "react";
-import ModalView from "./Modal";
+import { Card, Button } from "react-bootstrap"
+import React from "react"
+import ModalView from "./Modal"
 
 const SingleBook = (props) => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState(false)
 
   return (
     <>
@@ -17,7 +17,7 @@ const SingleBook = (props) => {
             <Card.Text>$ {props.book.price}</Card.Text>
           </div>
           <Button className="my-1" variant="outline-warning">
-            Buy Now
+            Add Cart
           </Button>
           <Button variant="outline-info" onClick={() => setModalShow(true)}>
             Comment
@@ -26,7 +26,7 @@ const SingleBook = (props) => {
       </Card>
       <ModalView show={modalShow} onHide={() => setModalShow(false)} />
     </>
-  );
-};
+  )
+}
 
-export default SingleBook;
+export default SingleBook
