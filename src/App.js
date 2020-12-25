@@ -7,7 +7,7 @@ const { useState } = require("react")
 const { BrowserRouter, Route } = require("react-router-dom")
 
 function App() {
-  const [currentCategory, setCurrentCategory] = useState("All")
+  const [currentCategory, setCurrentCategory] = useState("all")
 
   const updateCategory = (category) => setCurrentCategory(category)
   return (
