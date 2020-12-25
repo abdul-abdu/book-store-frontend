@@ -1,5 +1,4 @@
-import React from "react"
-import {
+const {
   Navbar,
   Nav,
   FormControl,
@@ -7,55 +6,75 @@ import {
   Dropdown,
   Container,
   Badge,
-} from "react-bootstrap"
+} = require("react-bootstrap")
+const { Link } = require("react-router-dom")
 
 const { FiShoppingCart } = require("react-icons/fi")
 
-const BookCategories = ["fantasy", "history", "romance", "scifi", "horror"]
+const BookCategories = [
+  "all",
+  "fantasy",
+  "history",
+  "romance",
+  "scifi",
+  "horror",
+]
 
-class NavBar extends React.Component {
-  render() {
-    return (
-      <Navbar className="fixed-top" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">StriveBookStore</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">
-              <FiShoppingCart /> Basket
-              <Badge variant="danger">c</Badge>
-            </Nav.Link>
-          </Nav>
-          <FormControl
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="basic-addon1"
-            // onChange={(e) => this.props.handleSearchQuery(e.target.value)}
-          />
-          <DropdownButton
-            variant="outline-secondary"
-            className="ml-2"
-            id="dropdown-basic-button"
-            title="ssk"
-          >
-            {BookCategories.map((category, idx) => {
-              return (
-                <Dropdown.Item
-                  key={idx}
-                  onClick={() => {
-                    if (category !== this.props.Ddowntitle) {
-                      this.props.handleDropdownChange(category)
-                    }
-                  }}
-                >
-                  {category.toUpperCase()}
-                </Dropdown.Item>
-              )
-            })}
-          </DropdownButton>
-        </Container>
-      </Navbar>
-    )
-  }
+const NavBar = (props) => {
+  const { updateCategory, currentCategory } = props
+  return (
+    <Navbar className="fixed-top" variant="dark">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          BookStore
+        </Navbar.Brand>
+        <Nav.Link as={Link} to="/booklist">
+          Booklist
+        </Nav.Link>
+
+        <FormControl
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="basic-addon1"
+          // onChange={(e) => this.props.handleSearchQuery(e.target.value)}
+        />
+        <DropdownButton
+          variant="outline-secondary"
+          className="ml-2"
+          id="dropdown-basic-button"
+          title={currentCategory.toUpperCase()}
+        >
+          {BookCategories.map((category, idx) => {
+            return (
+              <Dropdown.Item
+                key={idx}
+                onClick={() => {
+                  if (category !== currentCategory) {
+                    updateCategory(category)
+                  }
+                }}
+              >
+                {category.toUpperCase()}
+              </Dropdown.Item>
+            )
+          })}
+        </DropdownButton>
+        <Nav className="mr-auto">
+          <Nav.Link href="#home">
+            <div style={{ position: "relative" }}>
+              <FiShoppingCart size={32} />
+              <Badge
+                variant="danger"
+                style={{ position: "absolute", top: "15px" }}
+              >
+                0
+              </Badge>
+            </div>
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
+  )
 }
 
 export default NavBar
