@@ -15,13 +15,16 @@ const { useEffect, useState } = require("react")
 const BookInfo = (props) => {
   // Similar to componentDidMount and componentDidUpdate:
   const [bookDetail, setBookDetail] = useState(null)
+  const [comments, setComments] = useState([])
+  const [fetchingComment, setFetchingComments] = useState(true)
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState(null)
+  const [cmommentsError, setCmommentsError] = useState(null)
 
+  let url = process.env.API_URL || "http://localhost:3001/books/"
+  const bookId = props.match.params.id
   const fetchBook = async () => {
-    const bookId = props.match.params.id
     try {
-      let url = process.env.API_URL || "http://localhost:3001/books/"
       url += bookId
       const request = await fetch(url)
       console.log(request)
@@ -38,8 +41,26 @@ const BookInfo = (props) => {
     }
   }
 
+  const fetchComments = async () => {
+    try {
+      url += bookId + "/comments"
+      const response = await fetch(url)
+      if (response.ok) {
+        const comments = await response.json()
+        setComments(comments)
+        setFetchingComments(false)
+      } else {
+        setCmommentsError(response.status)
+      }
+    } catch (err) {
+      setCmommentsError(err)
+      setFetchingComments(false)
+    }
+  }
+
   useEffect(() => {
     fetchBook()
+    fetchComments()
   }, [props.match.params.id])
 
   return (
@@ -58,39 +79,48 @@ const BookInfo = (props) => {
             ) : (
               <>
                 <Col>
-                  <h1>
+                  <Image
+                    src={bookDetail.img}
+                    alt="img"
+                    style={{ width: "100%" }}
+                  />
+                </Col>
+                <Col>
+                  <h4>
                     <b>{bookDetail.title}</b>
-                  </h1>
+                  </h4>
                   <div>
                     <div>
                       <b className="mx-1">Price: </b>
-                      <Badge variant="success">$ {bookDetail.price}</Badge>
+                      <Badge variant="warning">$ {bookDetail.price}</Badge>
                     </div>
                     <div>
                       <b>Category: </b>
                       {bookDetail.category}
                     </div>
                   </div>
-                  <div className="comments">
-                    <h4>Comments</h4>
-                    <Form>
-                      <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                  <div className="comments border-top border-bottom mt-4 pt-2">
+                    <Form className="my-3 pb-2 border-bottom">
+                      <Form.Group controlId="username">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" placeholder="Name" />
+                      </Form.Group>
+                      <Form.Group controlId="comment">
+                        <Form.Label>Add Comment</Form.Label>
                         <Form.Control type="text" placeholder="Add comment" />
                       </Form.Group>
                       <Button variant="primary" type="submit">
                         Submit
                       </Button>
                     </Form>
-                    {/* COMMENTS */}
+                    <h4>Comments:</h4>
+
+                    {setFetchingComments ? (
+                      <Spinner animation="border" variant="success" />
+                    ) : (
+                      comments.map((comment) => JSON.stringify(comment))
+                    )}
                   </div>
-                </Col>
-                <Col style={{ width: "100%" }}>
-                  <Image
-                    src={bookDetail.img}
-                    alt="img"
-                    style={{ width: "100%" }}
-                  />
                 </Col>
               </>
             )}
