@@ -2,14 +2,14 @@ import "./App.css"
 import MyFooter from "./components/MyFooter"
 import BookList from "./components/BookList"
 import NavBar from "./components/NavBar"
-import LatestRelease from "./components/LatestRelease"
+import BookDetails from "./components/BookDetails"
 const { useState } = require("react")
 const { BrowserRouter, Route } = require("react-router-dom")
 
 function App() {
   const [currentCategory, setCurrentCategory] = useState("all")
-
   const updateCategory = (category) => setCurrentCategory(category)
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -17,21 +17,20 @@ function App() {
           updateCategory={updateCategory}
           currentCategory={currentCategory}
         />
-        <br />
-        <br />
-        <br />
-        <br />
-        {/* <LatestRelease /> */}
         <Route
           path="/"
           exact
-          render={() => <LatestRelease currentCategory={currentCategory} />}
+          render={() => (
+            <BookList homePage={true} currentCategory={currentCategory} />
+          )}
         />
         <Route
-          path="/booklist"
+          path="/books"
           exact
           render={() => <BookList currentCategory={currentCategory} />}
         />
+
+        <Route path="/books/:id/details" exact component={BookDetails} />
         <MyFooter />
       </BrowserRouter>
     </div>

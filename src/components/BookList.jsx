@@ -8,6 +8,7 @@ class BookList extends Component {
     this.state = {
       books: [],
       loading: true,
+      error: null,
     }
   }
 
@@ -16,21 +17,29 @@ class BookList extends Component {
   }
 
   refreshList = async () => {
-    const { currentCategory } = this.props
-    try {
-      const url = process.env.API_URL || "http://localhost:3001/"
-      const category = currentCategory === "all" ? null : currentCategory
-      console.log(category)
-      const req_url = category
-        ? url + "books/?category=" + category
-        : url + "books/"
-      console.log("url", req_url)
+    const { currentCategory, homePage } = this.props
+    let url = process.env.API_URL || "http://localhost:3001/"
+    const category = currentCategory === "all" ? null : currentCategory
 
+    if (homePage) {
+      url += "?home=true"
+    }
+    const req_url = category
+      ? url + "books/?category=" + category
+      : url + "books/"
+    console.log("req_url", req_url)
+
+    try {
       const request = await fetch(req_url)
       console.log(request)
-      const books = await request.json()
-      console.log(books)
-      this.setState({ books: books, loading: false })
+
+      if (request.ok) {
+        const books = await request.json()
+        console.log(books)
+        this.setState({ books: books, loading: false })
+      } else {
+        this.setState({ error: request, loading: false })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -45,11 +54,11 @@ class BookList extends Component {
   render() {
     const { books, loading } = this.state
     return (
-      <Container style={{ minHeight: "100vh" }}>
+      <Container style={{ minHeight: "80vh" }}>
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
           {loading ? (
             <>
-              <Col md={6}>
+              <Col md={{ span: 6, offset: 4 }}>
                 <Spinner animation="border" variant="success" />
               </Col>
             </>
