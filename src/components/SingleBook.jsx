@@ -1,20 +1,29 @@
 import { Card, Button } from "react-bootstrap"
 import React from "react"
 import ModalView from "./Modal"
+import { withRouter } from "react-router-dom"
 
 const SingleBook = (props) => {
   const [modalShow, setModalShow] = React.useState(false)
 
+  const { book, history } = props
   return (
     <>
       <Card style={{ maxWidth: "13rem" }}>
         <div className="card-img-box">
-          <Card.Img variant="top" src={props.book.img} />
+          <Card.Img
+            variant="top"
+            src={book.img}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push("/books/" + book.asin + "/details")
+            }}
+          />
         </div>
         <Card.Body>
           <div className="card-tex-box">
-            <Card.Title>{props.book.title}</Card.Title>
-            <Card.Text>$ {props.book.price}</Card.Text>
+            <Card.Title>{book.title}</Card.Title>
+            <Card.Text>$ {book.price}</Card.Text>
           </div>
           <Button className="my-1" variant="outline-warning">
             Add Cart
@@ -29,4 +38,4 @@ const SingleBook = (props) => {
   )
 }
 
-export default SingleBook
+export default withRouter(SingleBook)
