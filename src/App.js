@@ -3,6 +3,7 @@ import MyFooter from "./components/MyFooter"
 import BookList from "./components/BookList"
 import NavBar from "./components/NavBar"
 import BookDetails from "./components/BookDetails"
+import ScrollToTop from "./components/ScrollToTop"
 const { useState } = require("react")
 const { BrowserRouter, Route } = require("react-router-dom")
 
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <NavBar
           updateCategory={updateCategory}
           currentCategory={currentCategory}
