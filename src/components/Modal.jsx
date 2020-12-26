@@ -1,6 +1,6 @@
-const { Button, Modal } = require('react-bootstrap')
+const { Button, Modal } = require("react-bootstrap")
 
-function ModalView(props) {
+const Comments = (props) => {
   return (
     <Modal
       {...props}
@@ -9,9 +9,7 @@ function ModalView(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Comments</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>Centered Modal</h4>
@@ -25,9 +23,7 @@ function ModalView(props) {
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
-  );
+  )
 }
 
-
-
-export default ModalView
+export default Comments
