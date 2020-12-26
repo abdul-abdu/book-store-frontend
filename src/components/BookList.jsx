@@ -1,5 +1,6 @@
 import SingleBook from "./SingleBook"
-const { Component } = require("react")
+const { Component, Fragment } = require("react")
+const debounce = require("lodash.debounce")
 const { Col, Container, Row, Spinner } = require("react-bootstrap")
 
 class BookList extends Component {
@@ -9,11 +10,36 @@ class BookList extends Component {
       books: [],
       loading: true,
       error: null,
+      hasMore: true,
     }
+
+    window.onscroll = debounce(() => {
+      const {
+        refreshList,
+        state: { loading, hasMore, error },
+      } = this
+
+      if (error || loading || !hasMore) return
+
+      // Checks that the page has scrolled to the bottom
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        refreshList()
+      }
+    }, 100)
   }
 
-  componentDidMount = () => {
-    this.refreshList()
+  // componentDidMount = () => {
+  //   this.refreshList()
+  // }
+
+  // If category changes fetes data again
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.currentCategory !== this.props.currentCategory) {
+      this.refreshList()
+    }
   }
 
   refreshList = async () => {
@@ -24,10 +50,12 @@ class BookList extends Component {
     if (homePage) {
       url += "?home=true"
     }
-    const req_url = category
+    const categ_url = category
       ? url + "books/?category=" + category
       : url + "books/"
-    console.log("req_url", req_url)
+    console.log("req_url", categ_url)
+
+    const req_url = (categ_url += "/?results=10")
 
     try {
       const request = await fetch(req_url)
@@ -36,18 +64,15 @@ class BookList extends Component {
       if (request.ok) {
         const books = await request.json()
         console.log(books)
-        this.setState({ books: books, loading: false })
+        this.setState({
+          books: [...this.state.books, ...books],
+          loading: false,
+        })
       } else {
         this.setState({ error: request, loading: false })
       }
     } catch (error) {
       console.log(error)
-    }
-  }
-
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.currentCategory !== this.props.currentCategory) {
-      this.refreshList()
     }
   }
 
