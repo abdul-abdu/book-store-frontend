@@ -25,7 +25,7 @@ const NavBar = (props) => {
   const { updateCategory, currentCategory } = props
   return (
     <>
-      <Navbar variant="dark" expand="sm">
+      <Navbar fixed="top" variant="dark" expand="sm">
         <Container>
           <Navbar.Brand as={Link} to="/">
             BookStore
@@ -85,6 +85,9 @@ const NavBar = (props) => {
           </>
         </Container>
       </Navbar>
+      <br />
+      <br />
+      <br />
     </>
   )
 }
