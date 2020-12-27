@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ScrollToTop />
+        <ScrollToTop currentCategory={currentCategory} />
         <NavBar
           updateCategory={updateCategory}
           currentCategory={currentCategory}
