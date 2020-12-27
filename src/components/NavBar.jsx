@@ -34,7 +34,7 @@ const NavBar = (props) => {
         </Nav.Link>
         <Nav.Link href="#home">
           <div style={{ position: "relative" }}>
-            <FiShoppingCart size={32} />
+            <FiShoppingCart size={25} />
             <Badge
               variant="danger"
               style={{ position: "absolute", top: "15px" }}

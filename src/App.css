@@ -26,12 +26,12 @@
 }
 
 .card-img-box {
-  height: 200px;
+  /* height: 200px; */
   overflow: hidden;
 }
 
 .card-tex-box {
-  height: 100px;
+  min-height: 120px;
 }
 
 /* ******************* MODAL **************** */
@@ -69,4 +69,17 @@
 /* SLIDER */
 .slick-arrow {
   width: 40px;
+}
+
+@media (max-width: 400px) {
+  * {
+    font-size: 12px;
+  }
+  .App .card button {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .card-body {
+    padding: 0px 3px 5px 3px;
+  }
 }

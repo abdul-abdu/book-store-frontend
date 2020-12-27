@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap"
+import { Card, Button, Badge } from "react-bootstrap"
 import React from "react"
 import ModalView from "./Modal"
 import { withRouter } from "react-router-dom"
@@ -23,7 +23,9 @@ const SingleBook = (props) => {
         <Card.Body>
           <div className="card-tex-box">
             <Card.Title>{book.title}</Card.Title>
-            <Card.Text>$ {book.price}</Card.Text>
+            <Card.Text>
+              <Badge variant="success">${book.price}</Badge>{" "}
+            </Card.Text>
           </div>
           <Button className="my-1" variant="outline-warning">
             Add Cart
