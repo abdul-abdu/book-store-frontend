@@ -1,12 +1,50 @@
 import React, { Component } from "react"
-import { Container, Col } from "react-bootstrap"
+import {
+  Container,
+  Col,
+  Image,
+  Spinner,
+  Jumbotron,
+  Button,
+  Alert,
+} from "react-bootstrap"
+import { withRouter } from "react-router-dom"
 import Slider from "react-slick"
+const axios = require("axios").default
 
-export default class Responsive extends Component {
+class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      booksPreview: [],
+      loading: true,
+      error: null,
+    }
+  }
+
+  componentDidMount = () => {
+    const url = process.env.REACT_APP_API_URL
+    axios
+      .get(url + "/books?preview=all")
+      .then((response) => {
+        if (response.statusText === "OK") {
+          this.setState({ booksPreview: response.data, loading: false })
+          console.log(this.state.booksPreview)
+        }
+      })
+      .catch((err) => {
+        this.setState({
+          error: "Something went wrong. Try to refresh the page",
+          loading: false,
+        })
+        console.log("error:", err)
+      })
+  }
+
   render() {
     const settings = {
       dots: true,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
@@ -38,40 +76,57 @@ export default class Responsive extends Component {
         },
       ],
     }
+    const { booksPreview, loading, error } = this.state
     return (
-      <div className="text-white" style={{ minHeight: "80vh" }}>
-        <h2> Responsive </h2>
-        <Container>
-          <Col>
-            <Slider {...settings}>
-              <div>
-                <h3>1</h3>
-              </div>
-              <div>
-                <h3>2</h3>
-              </div>
-              <div>
-                <h3>3</h3>
-              </div>
-              <div>
-                <h3>4</h3>
-              </div>
-              <div>
-                <h3>5</h3>
-              </div>
-              <div>
-                <h3>6</h3>
-              </div>
-              <div>
-                <h3>7</h3>
-              </div>
-              <div>
-                <h3>8</h3>
-              </div>
-            </Slider>
-          </Col>
-        </Container>
-      </div>
+      <Container className="text-white " style={{ minHeight: "80vh" }}>
+        <Jumbotron className="bg-dark">
+          <h1>Hello, world!</h1>
+          <p>
+            This is a simple hero unit, a simple jumbotron-style component for
+            calling extra attention to featured content or information.
+          </p>
+          <p>
+            <Button variant="primary">Learn more</Button>
+          </p>
+        </Jumbotron>
+        {error && <Alert variant="danger">{error}</Alert>}
+        {loading && (
+          <div>
+            <Spinner animation="border" variant="success" />
+          </div>
+        )}
+        {booksPreview.map((booksCategories) => (
+          <div className="mb-5">
+            <h2 style={{ textAlign: "start" }}>
+              {booksCategories.category.toUpperCase()}
+            </h2>
+            <Col>
+              <Slider {...settings}>
+                {booksCategories.data.map((book) => (
+                  <div className="px-2">
+                    <Image
+                      src={book.img}
+                      alt="img"
+                      style={{
+                        width: "100%",
+                        height: "320px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        this.props.history.push(
+                          "/books/" + book.asin + "/details"
+                        )
+                      }}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </Col>
+          </div>
+        ))}
+      </Container>
     )
   }
 }
+
+export default withRouter(Home)

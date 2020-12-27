@@ -17,16 +17,12 @@ class BookList extends Component {
   }
 
   refreshList = async () => {
-    const { currentCategory, homePage } = this.props
-    let url = process.env.API_URL || "http://localhost:3001/"
+    const { currentCategory } = this.props
+    let url = process.env.REACT_APP_API_URL || "http://localhost:3001"
     const category = currentCategory === "all" ? null : currentCategory
-
-    if (homePage) {
-      url += "?home=true"
-    }
     const req_url = category
-      ? url + "books/?category=" + category
-      : url + "books/"
+      ? url + "/books/?category=" + category
+      : url + "/books/"
     console.log("req_url", req_url)
 
     try {
@@ -58,7 +54,7 @@ class BookList extends Component {
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
           {loading ? (
             <>
-              <Col md={{ span: 6, offset: 4 }}>
+              <Col sm={{ span: 6, offset: 5 }}>
                 <Spinner animation="border" variant="success" />
               </Col>
             </>

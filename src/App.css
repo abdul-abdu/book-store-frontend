@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  background-color: #121212;
-  padding-top: 140px;
+  background-color: #121212ce;
+  padding-top: 120px;
 }
 
 .App nav.navbar {
@@ -64,4 +64,9 @@
 
 .display-none {
   display: none;
+}
+
+/* SLIDER */
+.slick-arrow {
+  width: 40px;
 }
