@@ -4,6 +4,7 @@ import BookList from "./components/BookList"
 import NavBar from "./components/NavBar"
 import BookDetails from "./components/BookDetails"
 import ScrollToTop from "./components/ScrollToTop"
+import Home from "./components/Home"
 const { useState } = require("react")
 const { BrowserRouter, Route } = require("react-router-dom")
 
@@ -22,9 +23,7 @@ function App() {
         <Route
           path="/"
           exact
-          render={() => (
-            <BookList homePage={true} currentCategory={currentCategory} />
-          )}
+          render={() => <Home currentCategory={currentCategory} />}
         />
         <Route
           path="/books"
