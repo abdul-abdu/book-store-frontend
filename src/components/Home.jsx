@@ -95,8 +95,8 @@ class Home extends Component {
             <Spinner animation="border" variant="success" />
           </div>
         )}
-        {booksPreview.map((booksCategories) => (
-          <div className="mb-5">
+        {booksPreview.map((booksCategories, idx) => (
+          <div className="mb-5" key={idx}>
             <h2 style={{ textAlign: "start" }}>
               {booksCategories.category.toUpperCase()}
             </h2>

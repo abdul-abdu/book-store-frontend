@@ -66,13 +66,13 @@ const BookInfo = (props) => {
   return (
     <Container className="text-white" style={{ minHeight: "80vh" }}>
       <Row xs={1} sm={1} md={2}>
-        {fetching ? (
+        {fetching || fetchingComment ? (
           <Col md={{ span: 6, offset: 4 }}>
             <Spinner animation="border" variant="success" />
           </Col>
         ) : (
           <>
-            {error ? (
+            {error || cmommentsError ? (
               <Alert variant="danger">
                 Something went wrong! Try to refresh the page
               </Alert>
