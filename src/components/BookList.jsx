@@ -1,6 +1,6 @@
 import SingleBook from "./SingleBook"
 const { Component } = require("react")
-const { Col, Container, Row, Spinner } = require("react-bootstrap")
+const { Col, Container, Row, Spinner, Alert } = require("react-bootstrap")
 
 class BookList extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class BookList extends Component {
 
   refreshList = async () => {
     const { currentCategory } = this.props
-    let url = process.env.REACT_APP_API_URL || "http://localhost:3001"
+    let url = "ss" //process.env.REACT_APP_API_URL || "http://localhost:3001"
     const category = currentCategory === "all" ? null : currentCategory
     const req_url = category
       ? url + "/books/?category=" + category
@@ -34,9 +34,16 @@ class BookList extends Component {
         console.log(books)
         this.setState({ books: books, loading: false })
       } else {
-        this.setState({ error: request, loading: false })
+        this.setState({
+          error: "Something went wrong. Try to refresh the page",
+          loading: false,
+        })
       }
     } catch (error) {
+      this.setState({
+        error: "Something went wrong. Try to refresh the page",
+        loading: false,
+      })
       console.log(error)
     }
   }
@@ -48,9 +55,10 @@ class BookList extends Component {
   }
 
   render() {
-    const { books, loading } = this.state
+    const { books, loading, error } = this.state
     return (
       <Container style={{ minHeight: "80vh" }}>
+        {error && <Alert variant="danger">{error}</Alert>}
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
           {loading ? (
             <>

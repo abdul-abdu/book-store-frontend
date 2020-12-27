@@ -95,35 +95,36 @@ class Home extends Component {
             <Spinner animation="border" variant="success" />
           </div>
         )}
-        {booksPreview.map((booksCategories, idx) => (
-          <div className="mb-5" key={idx}>
-            <h2 style={{ textAlign: "start" }}>
-              {booksCategories.category.toUpperCase()}
-            </h2>
-            <Col>
-              <Slider {...settings}>
-                {booksCategories.data.map((book) => (
-                  <div className="px-2">
-                    <Image
-                      src={book.img}
-                      alt="img"
-                      style={{
-                        width: "100%",
-                        height: "320px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        this.props.history.push(
-                          "/books/" + book.asin + "/details"
-                        )
-                      }}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </Col>
-          </div>
-        ))}
+        {booksPreview.length &&
+          booksPreview.map((booksCategories, idx) => (
+            <div className="mb-5" key={idx}>
+              <h2 style={{ textAlign: "start" }}>
+                {booksCategories.category.toUpperCase()}
+              </h2>
+              <Col>
+                <Slider {...settings}>
+                  {booksCategories.data.map((book) => (
+                    <div className="px-2">
+                      <Image
+                        src={book.img}
+                        alt="img"
+                        style={{
+                          width: "100%",
+                          height: "320px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          this.props.history.push(
+                            "/books/" + book.asin + "/details"
+                          )
+                        }}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </Col>
+            </div>
+          ))}
       </Container>
     )
   }
