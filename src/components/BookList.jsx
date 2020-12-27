@@ -18,7 +18,7 @@ class BookList extends Component {
 
   refreshList = async () => {
     const { currentCategory } = this.props
-    let url = "ss" //process.env.REACT_APP_API_URL || "http://localhost:3001"
+    let url = process.env.REACT_APP_API_URL || "http://localhost:3001"
     const category = currentCategory === "all" ? null : currentCategory
     const req_url = category
       ? url + "/books/?category=" + category
