@@ -1,13 +1,11 @@
 .App {
   text-align: center;
-}
-
-.App {
   background-color: #121212;
+  padding-top: 140px;
 }
 
 .App nav.navbar {
-  background-color: #040404;
+  background-color: #282828;
 }
 
 /* Cards */
