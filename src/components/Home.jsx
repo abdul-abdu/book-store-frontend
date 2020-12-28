@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import {
   Container,
   Col,
@@ -7,39 +7,39 @@ import {
   Jumbotron,
   Button,
   Alert,
-} from "react-bootstrap"
-import { withRouter } from "react-router-dom"
-import Slider from "react-slick"
-const axios = require("axios").default
+} from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import Slider from "react-slick";
+const axios = require("axios").default;
 
 class Home extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       booksPreview: [],
       loading: true,
       error: null,
-    }
+    };
   }
 
   componentDidMount = () => {
-    const url = process.env.REACT_APP_API_URL
+    const url = process.env.REACT_APP_API_URL;
     axios
       .get(url + "/books?preview=all")
       .then((response) => {
         if (response.statusText === "OK") {
-          this.setState({ booksPreview: response.data, loading: false })
-          console.log(this.state.booksPreview)
+          this.setState({ booksPreview: response.data, loading: false });
+          console.log(this.state.booksPreview);
         }
       })
       .catch((err) => {
         this.setState({
           error: "Something went wrong. Try to refresh the page",
           loading: false,
-        })
-        console.log("error:", err)
-      })
-  }
+        });
+        console.log("error:", err);
+      });
+  };
 
   render() {
     const settings = {
@@ -75,8 +75,8 @@ class Home extends Component {
           },
         },
       ],
-    }
-    const { booksPreview, loading, error } = this.state
+    };
+    const { booksPreview, loading, error } = this.state;
     return (
       <Container className="text-white " style={{ minHeight: "80vh" }}>
         <Jumbotron className="bg-dark">
@@ -116,7 +116,7 @@ class Home extends Component {
                         onClick={() => {
                           this.props.history.push(
                             "/books/" + book.asin + "/details"
-                          )
+                          );
                         }}
                       />
                     </div>
@@ -126,8 +126,8 @@ class Home extends Component {
             </div>
           ))}
       </Container>
-    )
+    );
   }
 }
 
-export default withRouter(Home)
+export default withRouter(Home);
