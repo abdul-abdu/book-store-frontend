@@ -29,12 +29,14 @@ const NavBar = (props) => {
         <Navbar.Brand as={Link} to="/">
           BookStore
         </Navbar.Brand>
-        <Nav.Link as={Link} to="/books">
-          Booklist
-        </Nav.Link>
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to="/books">
+            Booklist
+          </Nav.Link>
+        </Nav>
         <Nav.Link href="#home">
           <div style={{ position: "relative" }}>
-            <FiShoppingCart size={25} />
+            <FiShoppingCart size={20} />
             <Badge
               variant="danger"
               style={{ position: "absolute", top: "15px" }}
@@ -43,6 +45,7 @@ const NavBar = (props) => {
             </Badge>
           </div>
         </Nav.Link>
+
         <>
           {props.location.pathname === "/books" && (
             <Col className="pl-0">
