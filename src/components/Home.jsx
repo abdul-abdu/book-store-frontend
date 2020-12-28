@@ -103,8 +103,8 @@ class Home extends Component {
               </h2>
               <Col>
                 <Slider {...settings}>
-                  {booksCategories.data.map((book) => (
-                    <div className="px-2">
+                  {booksCategories.data.map((book, idx) => (
+                    <div className="px-2" key={idx}>
                       <Image
                         src={book.img}
                         alt="img"

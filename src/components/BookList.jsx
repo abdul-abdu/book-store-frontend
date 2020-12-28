@@ -69,7 +69,7 @@ class BookList extends Component {
           ) : (
             books.map((book, idx) => {
               return (
-                <Col className="my-2" key={idx}>
+                <Col className="my-2 px-0" key={idx}>
                   <SingleBook book={book} />
                 </Col>
               )
