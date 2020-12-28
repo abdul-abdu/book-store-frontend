@@ -50,7 +50,7 @@ const NavBar = (props) => {
           {props.location.pathname === "/books" && (
             <Col className="pl-0">
               <FormControl
-                style={{ minWidth: "110px" }}
+                style={{ minWidth: "140px" }}
                 type="text"
                 placeholder="Search"
                 className="ml-md-2 "
