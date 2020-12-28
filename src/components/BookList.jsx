@@ -58,23 +58,19 @@ class BookList extends Component {
     const { books, loading, error } = this.state;
     return (
       <Container style={{ minHeight: "80vh" }}>
+        {loading && (
+          <Spinner animation="border" variant="success" className="mt-5" />
+        )}
         {error && <Alert variant="danger">{error}</Alert>}
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
-          {loading ? (
-            <>
-              <Col sm={{ span: 6, offset: 5 }}>
-                <Spinner animation="border" variant="success" />
-              </Col>
-            </>
-          ) : (
+          {!loading &&
             books.map((book, idx) => {
               return (
-                <Col className="my-2 px-0" key={idx}>
+                <Col className="my-2 px-1" key={idx}>
                   <SingleBook book={book} />
                 </Col>
               );
-            })
-          )}
+            })}
         </Row>
       </Container>
     );

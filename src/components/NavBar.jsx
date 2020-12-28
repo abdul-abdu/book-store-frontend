@@ -7,10 +7,10 @@ const {
   Container,
   Badge,
   Col,
-} = require("react-bootstrap")
-const { Link, withRouter } = require("react-router-dom")
+} = require("react-bootstrap");
+const { Link, withRouter } = require("react-router-dom");
 
-const { FiShoppingCart } = require("react-icons/fi")
+const { FiShoppingCart } = require("react-icons/fi");
 
 const BookCategories = [
   "all",
@@ -19,10 +19,10 @@ const BookCategories = [
   "romance",
   "scifi",
   "horror",
-]
+];
 
 const NavBar = (props) => {
-  const { updateCategory, currentCategory } = props
+  const { updateCategory, currentCategory } = props;
   return (
     <Navbar fixed="top" variant="dark" expand="sm">
       <Container>
@@ -44,7 +44,7 @@ const NavBar = (props) => {
           </div>
         </Nav.Link>
         <>
-          {!props.location.pathname.includes("details") && (
+          {props.location.pathname === "/books" && (
             <Col className="pl-0">
               <FormControl
                 style={{ minWidth: "110px" }}
@@ -56,7 +56,8 @@ const NavBar = (props) => {
             </Col>
           )}
           <>
-            {!props.location.pathname.includes("details") && (
+            {console.log("props.location.pathname", props.location.pathname)}
+            {props.location.pathname === "/books" && (
               <DropdownButton
                 menuAlign="right"
                 variant="outline-secondary"
@@ -70,13 +71,13 @@ const NavBar = (props) => {
                       key={idx}
                       onClick={() => {
                         if (category !== currentCategory) {
-                          updateCategory(category)
+                          updateCategory(category);
                         }
                       }}
                     >
                       {category.toUpperCase()}
                     </Dropdown.Item>
-                  )
+                  );
                 })}
               </DropdownButton>
             )}
@@ -84,7 +85,7 @@ const NavBar = (props) => {
         </>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);

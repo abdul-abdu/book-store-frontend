@@ -1,7 +1,11 @@
 .App {
   text-align: center;
-  background-color: #121212ce;
-  padding-top: 120px;
+  background-color: #577e7b;
+  padding-top: 80px;
+}
+
+.slick-arrow {
+  z-index: 10;
 }
 
 .App nav.navbar {
@@ -76,10 +80,14 @@
     font-size: 12px;
   }
   .App .card button {
-    width: 100%;
-    font-size: 1rem;
+    width: 90%;
+    font-size: 1.09rem;
   }
   .card-body {
     padding: 0px 3px 5px 3px;
+  }
+
+  .card-tex-box {
+    min-height: 80px;
   }
 }
