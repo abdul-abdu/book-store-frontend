@@ -1,12 +1,12 @@
-import { Card, Button, Badge } from "react-bootstrap"
-import React from "react"
-import ModalView from "./Modal"
-import { withRouter } from "react-router-dom"
+import { Card, Button, Badge } from "react-bootstrap";
+import React from "react";
+import ModalView from "./Modal";
+import { withRouter } from "react-router-dom";
 
 const SingleBook = (props) => {
-  const [modalShow, setModalShow] = React.useState(false)
+  const [modalShow, setModalShow] = React.useState(false);
 
-  const { book, history } = props
+  const { book, history } = props;
   return (
     <>
       <Card style={{ maxWidth: "13rem" }}>
@@ -16,7 +16,7 @@ const SingleBook = (props) => {
             src={book.img}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              history.push("/books/" + book.asin + "/details")
+              history.push("/books/" + book._id + "/details");
             }}
           />
         </div>
@@ -37,7 +37,7 @@ const SingleBook = (props) => {
       </Card>
       <ModalView show={modalShow} onHide={() => setModalShow(false)} />
     </>
-  )
-}
+  );
+};
 
-export default withRouter(SingleBook)
+export default withRouter(SingleBook);
