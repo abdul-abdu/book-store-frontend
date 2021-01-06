@@ -115,7 +115,7 @@ class Home extends Component {
                         }}
                         onClick={() => {
                           this.props.history.push(
-                            "/books/" + book._id + "/details"
+                            "/books/" + book.asin + "/details"
                           );
                         }}
                       />

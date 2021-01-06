@@ -16,7 +16,7 @@ const SingleBook = (props) => {
             src={book.img}
             style={{ cursor: "pointer" }}
             onClick={() => {
-              history.push("/books/" + book._id + "/details");
+              history.push("/books/" + book.asin + "/details");
             }}
           />
         </div>
