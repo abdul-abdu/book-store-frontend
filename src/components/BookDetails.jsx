@@ -1,3 +1,5 @@
+import BeautyStars from "beauty-stars";
+
 const { Component } = require("react");
 const {
   Spinner,
@@ -22,10 +24,71 @@ class BookInfo extends Component {
       comments: [],
       loadingComments: true,
       cmommentsError: null,
+      form: { rate: 0, comment: "", name: "" },
+      sendingComment: false,
+      errorSendingComment: null,
     };
     this.url = process.env.REACT_APP_API_URL;
     this.bookId = props.match.params.id;
   }
+
+  fetchData = (url) => {
+    axios
+      .get(url)
+      .then((response) => {
+        return { data: response.data, loading: false, error: null };
+      })
+      .catch((error) => {
+        return {
+          error: "Something went wrong. Try to refresh the page",
+          loading: false,
+          data: null,
+        };
+      });
+  };
+
+  submitForm = async (e) => {
+    e.preventDefault();
+    this.setState({ sendingComment: true });
+    try {
+      const response = await fetch(
+        this.url + `/books/${this.bookId}/comments`,
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.form),
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+        }
+      );
+
+      if (response.ok) {
+        this.setState({
+          sendingComment: false,
+          form: {
+            rate: 0,
+            name: "",
+            comment: "",
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+
+      this.setState({ errorSendingComment: true });
+    }
+  };
+
+  updateForm = (e) => {
+    const form = { ...this.state.form };
+    if (e.currentTarget) {
+      const curruntId = e.currentTarget.id;
+      form[curruntId] = e.currentTarget.value;
+    } else {
+      form.rate = e;
+    }
+    this.setState({ form });
+  };
 
   componentDidMount = () => {
     axios
@@ -67,6 +130,7 @@ class BookInfo extends Component {
       comments,
       cmommentsError,
       loadingComments,
+      form,
     } = this.state;
     return (
       <Container className="text-white" style={{ minHeight: "80vh" }}>
@@ -105,16 +169,40 @@ class BookInfo extends Component {
                       </div>
                     </div>
                     <div className="comments border-top border-bottom mt-4 pt-2">
-                      <Form className="my-3 pb-2 border-bottom">
-                        <Form.Group controlId="username">
+                      <Form
+                        onSubmit={this.submitForm}
+                        className="my-3 pb-2 border-bottom"
+                      >
+                        <Form.Group controlId="name">
                           <Form.Label>Name</Form.Label>
-                          <Form.Control type="text" placeholder="Name" />
+                          <Form.Control
+                            required
+                            type="text"
+                            placeholder="Name"
+                            value={form.name}
+                            onChange={this.updateForm}
+                          />
                         </Form.Group>
                         <Form.Group controlId="comment">
                           <Form.Label>Add Comment</Form.Label>
-                          <Form.Control type="text" placeholder="Add comment" />
+                          <Form.Control
+                            required
+                            type="text"
+                            placeholder="Add comment"
+                            value={form.comment}
+                            onChange={this.updateForm}
+                          />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Form.Label>Rate</Form.Label>
+                        <BeautyStars
+                          value={form.rate}
+                          onChange={this.updateForm}
+                        />
+                        <Button
+                          className="mt-4"
+                          variant="primary"
+                          type="submit"
+                        >
                           Submit
                         </Button>
                       </Form>
