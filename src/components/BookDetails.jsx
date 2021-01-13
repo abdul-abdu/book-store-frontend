@@ -154,11 +154,11 @@ class BookInfo extends Component {
                       style={{ width: "100%" }}
                     />
                   </Col>
-                  <Col>
+                  <Col style={{ textAlign: "start" }}>
                     <h4>
                       <b>{bookDetail.title}</b>
                     </h4>
-                    <div>
+                    <div className="my-3">
                       <div>
                         <b className="mx-1">Price: </b>
                         <Badge variant="warning">$ {bookDetail.price}</Badge>
@@ -168,6 +168,7 @@ class BookInfo extends Component {
                         {bookDetail.category}
                       </div>
                     </div>
+                    <Button variant="warning">Buy Now</Button>
                     <div className="comments border-top border-bottom mt-4 pt-2">
                       <Form
                         onSubmit={this.submitForm}
