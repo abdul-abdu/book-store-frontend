@@ -43,6 +43,7 @@ class BookList extends Component {
       let currentQuery = query ? query : "?limit=10&offset=10";
       if (currentCategory !== "all") {
         currentQuery += `&category=${currentCategory}`;
+        this.setState({ books: [] });
       }
 
       const request = await fetch(url + currentQuery);
@@ -78,7 +79,7 @@ class BookList extends Component {
   };
 
   render() {
-    const { books, loading, error, next_books } = this.state;
+    const { books, loading, error } = this.state;
     return (
       <Container style={{ minHeight: "80vh" }}>
         {loading && (
@@ -96,8 +97,6 @@ class BookList extends Component {
               );
             })}
         </Row>
-
-        {!next_books && <Alert variant="danger">There is no more books</Alert>}
       </Container>
     );
   }
