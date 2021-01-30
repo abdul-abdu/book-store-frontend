@@ -21,11 +21,6 @@ class BookList extends Component {
 
       if (error || loading) return;
 
-      console.log(
-        window.innerHeight + document.documentElement.scrollTop ===
-          document.documentElement.offsetHeight
-      );
-
       if (
         window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight
@@ -45,8 +40,10 @@ class BookList extends Component {
     let url = process.env.REACT_APP_API_URL + "/books";
 
     try {
-      const currentQuery = query ? query : "?limit=10&offset=10";
-      console.log("currentQuery", currentQuery);
+      let currentQuery = query ? query : "?limit=10&offset=10";
+      if (currentCategory !== "all") {
+        currentQuery += `&category=${currentCategory}`;
+      }
 
       const request = await fetch(url + currentQuery);
 
