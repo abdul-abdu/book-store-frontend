@@ -1,5 +1,6 @@
 {
-  "name": "update-book-store",
+  "name": "strive-book-store",
+  "homepage": "https://github.com/Abdugaffor-97/book-store-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

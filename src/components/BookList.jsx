@@ -42,15 +42,13 @@ class BookList extends Component {
   refreshList = async (query) => {
     this.setState({ loading: true });
     const { currentCategory } = this.props;
-    let url = process.env.REACT_APP_API_URL + "/books/";
-    const category = currentCategory === "all" ? null : currentCategory;
-    const req_url = category ? url + "?category=" + category : url;
+    let url = process.env.REACT_APP_API_URL + "/books";
 
     try {
       const currentQuery = query ? query : "?limit=10&offset=10";
       console.log("currentQuery", currentQuery);
 
-      const request = await fetch(req_url + currentQuery);
+      const request = await fetch(url + currentQuery);
 
       if (request.ok) {
         const { books, next } = await request.json();
