@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class scrollToTop extends Component {
   componentDidUpdate(prevProps) {
@@ -7,13 +7,13 @@ class scrollToTop extends Component {
       this.props.location !== prevProps.location ||
       this.props.currentCategory !== prevProps.currentCategory
     ) {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     }
   }
 
   render() {
-    return <React.Fragment />
+    return <React.Fragment />;
   }
 }
 
-export default withRouter(scrollToTop)
+export default withRouter(scrollToTop);
