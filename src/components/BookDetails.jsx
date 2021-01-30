@@ -90,37 +90,34 @@ class BookInfo extends Component {
     this.setState({ form });
   };
 
-  componentDidMount = () => {
-    axios
-      .get(this.url + "/books/" + this.bookId)
-      .then((response) => {
-        this.setState({ bookDetail: response.data, loading: false });
-        console.log("response", response.data);
-      })
-      .catch(function (error) {
-        this.setState({
-          error: "Something went wrong. Try to refresh the page",
-          loading: false,
-        });
-      });
-  };
-
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.loading !== this.state.loading) {
-      axios
-        .get(this.url + "/books/" + this.bookId + "/comments")
-        .then((response) => {
-          this.setState({ comments: response.data, loadingComments: false });
-          console.log("response", response.data);
-        })
-        .catch((error) => {
-          this.setState({
-            cmommentsError: "Something went wrong. Try to refresh the page",
-            loadingComments: false,
-          });
-        });
+  componentDidMount = async () => {
+    try {
+      const response = await fetch(this.url + "/books/" + this.bookId);
+      if (response.ok) {
+        const bookDetails = await response.json();
+        this.setState({ bookDetail: bookDetails, loading: false });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (prevState.loading !== this.state.loading) {
+  //     axios
+  //       .get(this.url + "/books/" + this.bookId + "/comments")
+  //       .then((response) => {
+  //         this.setState({ comments: response.data, loadingComments: false });
+  //         console.log("response", response.data);
+  //       })
+  //       .catch((error) => {
+  //         this.setState({
+  //           cmommentsError: "Something went wrong. Try to refresh the page",
+  //           loadingComments: false,
+  //         });
+  //       });
+  //   }
+  // };
 
   render() {
     const {

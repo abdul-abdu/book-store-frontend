@@ -9,6 +9,7 @@ class BookList extends Component {
       books: [],
       loading: true,
       error: null,
+      next_books: null,
     };
   }
 
@@ -26,13 +27,12 @@ class BookList extends Component {
     console.log("req_url", req_url);
 
     try {
-      const request = await fetch(req_url);
-      console.log(request);
+      const request = await fetch(req_url + "?limit=10&offset=10");
+      // console.log(request);
 
       if (request.ok) {
-        const books = await request.json();
-        console.log(books);
-        this.setState({ books: books, loading: false });
+        const { books, next } = await request.json();
+        this.setState({ books: books, loading: false, next_books: next });
       } else {
         this.setState({
           error: "Something went wrong. Try to refresh the page",
