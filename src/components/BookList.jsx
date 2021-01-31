@@ -1,5 +1,5 @@
 import SingleBook from "./SingleBook";
-import debounce from "lodash.debounce";
+import ScrollDebounce from "../functions/ScrollDebounce";
 
 const { Component } = require("react");
 const { Col, Container, Row, Spinner, Alert } = require("react-bootstrap");
@@ -14,20 +14,7 @@ class BookList extends Component {
       next_books: null,
     };
 
-    window.onscroll = debounce(() => {
-      const {
-        state: { error, loading, next_books },
-      } = this;
-
-      if (error || loading) return;
-
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        this.refreshList(next_books);
-      }
-    }, 100);
+    ScrollDebounce(this);
   }
 
   componentDidMount = () => {
