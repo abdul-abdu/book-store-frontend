@@ -13,6 +13,7 @@ const scrollDebounce = (prop) => {
       document.documentElement.offsetHeight
     ) {
       prop.refreshList(next_books);
+      // window.scrollTo(0, document.documentElement.offsetHeight);
     }
   }, 100);
 };

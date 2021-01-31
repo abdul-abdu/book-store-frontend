@@ -14,6 +14,7 @@ class BookList extends Component {
       next_books: null,
     };
 
+    // Infifite scroll
     ScrollDebounce(this);
   }
 
@@ -77,13 +78,10 @@ class BookList extends Component {
     const { books, loading, error } = this.state;
     return (
       <Container style={{ minHeight: "80vh" }}>
-        {loading && (
-          <Spinner animation="border" variant="success" className="mt-5" />
-        )}
         {error && <Alert variant="danger">{error}</Alert>}
 
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
-          {!loading &&
+          {books.length &&
             books.map((book, idx) => {
               return (
                 <Col className="my-2 px-1" key={idx}>
@@ -92,6 +90,9 @@ class BookList extends Component {
               );
             })}
         </Row>
+        {loading && (
+          <Spinner animation="border" variant="warning" className="mt-5" />
+        )}
       </Container>
     );
   }
