@@ -25,7 +25,7 @@ class Home extends Component {
   componentDidMount = () => {
     const url = process.env.REACT_APP_API_URL;
     axios
-      .get(url + "/books?preview=all")
+      .get(url + "/books/preview")
       .then((response) => {
         if (response.statusText === "OK") {
           this.setState({ booksPreview: response.data, loading: false });
@@ -99,11 +99,11 @@ class Home extends Component {
           booksPreview.map((booksCategories, idx) => (
             <div className="mb-5" key={idx}>
               <h2 style={{ textAlign: "start" }}>
-                {booksCategories.category.toUpperCase()}
+                {booksCategories[0].category.toUpperCase()}
               </h2>
               <Col>
                 <Slider {...settings}>
-                  {booksCategories.data.map((book, idx) => (
+                  {booksCategories.map((book, idx) => (
                     <div className="px-2" key={idx}>
                       <Image
                         src={book.img}
@@ -115,7 +115,7 @@ class Home extends Component {
                         }}
                         onClick={() => {
                           this.props.history.push(
-                            "/books/" + book.asin + "/details"
+                            "/books/" + book._id + "/details"
                           );
                         }}
                       />
