@@ -1,40 +1,28 @@
+import React, { useState, useEffect } from "react";
 import SingleBook from "./SingleBook";
 import ScrollDebounce from "../functions/ScrollDebounce";
 
-const { Component } = require("react");
 const { Col, Container, Row, Spinner, Alert } = require("react-bootstrap");
 
-class BookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: [],
-      loading: true,
-      error: null,
-      next_books: null,
-    };
+export default function BookList(props) {
+  const [error, setError] = useState(null);
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(null);
+  const [nextQuery, setNextQuery] = useState(null);
 
-    // Infifite scroll
-    ScrollDebounce(this);
-  }
-
-  componentDidMount = () => {
-    this.refreshList();
-  };
-
-  refreshList = async (query) => {
-    this.setState({ loading: true });
-    const { currentCategory } = this.props;
+  const refreshList = async (query) => {
+    setLoading({ loading: true });
+    const { currentCategory } = props;
     let url = process.env.REACT_APP_API_URL + "/books";
 
     try {
       let currentQuery = query ? query : "?limit=10&offset=0";
       if (currentCategory !== "all") {
         currentQuery += `&category=${currentCategory}`;
-        this.setState({ books: [] });
+        setBooks([]);
       }
 
-      if (this.props.searchQuery) {
+      if (props.searchQuery) {
         console.log(this.props.searchQuery);
         currentQuery += `&title=${this.props.searchQuery}`;
       }
@@ -42,41 +30,30 @@ class BookList extends Component {
       const request = await fetch(url + currentQuery);
 
       if (request.ok) {
-        const { books, next } = await request.json();
-        console.log("books", books);
+        const { books: newBooks, next } = await request.json();
 
-        this.setState({
-          books: [...this.state.books, ...books],
-          loading: false,
-          next_books: next,
-        });
+        setBooks([...books, ...newBooks]);
+        setLoading(false);
+        setNextQuery(next);
       } else {
-        this.setState({
-          error: "Something went wrong. Try to refresh the page",
-          loading: false,
-        });
+        setError("Something went wrong. Try to refresh the page");
+        setLoading(false);
       }
     } catch (error) {
-      this.setState({
-        error: "Something went wrong. Try to refresh the page",
-        loading: false,
-      });
+      setError("Something went wrong. Try to refresh the page");
+      setLoading(false);
       console.log(error);
     }
   };
 
-  componentDidUpdate = (prevProps) => {
-    if (
-      prevProps.currentCategory !== this.props.currentCategory ||
-      prevProps.searchQuery !== this.props.searchQuery
-    ) {
-      this.refreshList();
-    }
-  };
+  ScrollDebounce({ loading, error, nextQuery, refreshList });
 
-  render() {
-    const { books, loading, error } = this.state;
-    return (
+  useEffect(() => {
+    refreshList();
+  }, []);
+
+  return (
+    <div>
       <Container style={{ minHeight: "80vh" }}>
         {error && <Alert variant="danger">{error}</Alert>}
 
@@ -94,8 +71,6 @@ class BookList extends Component {
           <Spinner animation="border" variant="warning" className="mt-5" />
         )}
       </Container>
-    );
-  }
+    </div>
+  );
 }
-
-export default BookList;
