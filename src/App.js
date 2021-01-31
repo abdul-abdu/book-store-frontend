@@ -10,14 +10,15 @@ const { BrowserRouter, Route } = require("react-router-dom");
 
 function App() {
   const [currentCategory, setCurrentCategory] = useState("all");
-  const updateCategory = (category) => setCurrentCategory(category);
+  const [searchQuery, setSearchQuery] = useState(null);
 
   return (
     <div className="App">
       <BrowserRouter>
         <ScrollToTop currentCategory={currentCategory} />
         <NavBar
-          updateCategory={updateCategory}
+          updateCategory={setCurrentCategory}
+          updateSearchQuery={setSearchQuery}
           currentCategory={currentCategory}
         />
         <Route
@@ -28,7 +29,12 @@ function App() {
         <Route
           path="/books"
           exact
-          render={() => <BookList currentCategory={currentCategory} />}
+          render={() => (
+            <BookList
+              currentCategory={currentCategory}
+              searchQuery={searchQuery}
+            />
+          )}
         />
 
         <Route path="/books/:id/details" exact component={BookDetails} />

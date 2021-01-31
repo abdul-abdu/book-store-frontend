@@ -22,7 +22,7 @@ const BookCategories = [
 ];
 
 const NavBar = (props) => {
-  const { updateCategory, currentCategory } = props;
+  const { updateCategory, currentCategory, updateSearchQuery } = props;
   return (
     <Navbar fixed="top" variant="dark" expand="sm">
       <Container>
@@ -54,12 +54,11 @@ const NavBar = (props) => {
                 type="text"
                 placeholder="Search"
                 className="ml-md-2 "
-                // onChange={(e) => this.props.handleSearchQuery(e.target.value)}
+                onChange={(e) => updateSearchQuery(e.target.value)}
               />
             </Col>
           )}
           <>
-            {console.log("props.location.pathname", props.location.pathname)}
             {props.location.pathname === "/books" && (
               <DropdownButton
                 menuAlign="right"

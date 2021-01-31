@@ -40,10 +40,15 @@ class BookList extends Component {
     let url = process.env.REACT_APP_API_URL + "/books";
 
     try {
-      let currentQuery = query ? query : "?limit=10&offset=10";
+      let currentQuery = query ? query : "?limit=10&offset=0";
       if (currentCategory !== "all") {
         currentQuery += `&category=${currentCategory}`;
         this.setState({ books: [] });
+      }
+
+      if (this.props.searchQuery) {
+        console.log(this.props.searchQuery);
+        currentQuery += `&title=${this.props.searchQuery}`;
       }
 
       const request = await fetch(url + currentQuery);
@@ -73,7 +78,10 @@ class BookList extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.currentCategory !== this.props.currentCategory) {
+    if (
+      prevProps.currentCategory !== this.props.currentCategory ||
+      prevProps.searchQuery !== this.props.searchQuery
+    ) {
       this.refreshList();
     }
   };
