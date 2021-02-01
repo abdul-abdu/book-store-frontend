@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SingleBook from "./SingleBook";
 import ScrollDebounce from "../functions/ScrollDebounce";
+import { Spring } from "react-spring/renderprops";
 
 const { Col, Container, Row, Spinner, Alert } = require("react-bootstrap");
 
@@ -62,7 +63,13 @@ export default function BookList(props) {
             books.map((book, idx) => {
               return (
                 <Col className="my-2 px-1" key={idx}>
-                  <SingleBook book={book} />
+                  <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                    {(props) => (
+                      <div style={props}>
+                        <SingleBook book={book} />
+                      </div>
+                    )}
+                  </Spring>
                 </Col>
               );
             })}
