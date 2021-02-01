@@ -1,11 +1,10 @@
 import { Card, Button, Badge } from "react-bootstrap";
 import React from "react";
-import ModalView from "./Modal";
 import { withRouter } from "react-router-dom";
+import { GiShoppingCart } from "react-icons/gi";
+import { MdFavorite } from "react-icons/md";
 
 const SingleBook = (props) => {
-  const [modalShow, setModalShow] = React.useState(false);
-
   const { book, history } = props;
   return (
     <>
@@ -28,14 +27,13 @@ const SingleBook = (props) => {
             </Card.Text>
           </div>
           <Button className="my-1" variant="outline-warning">
-            Add Cart
+            <GiShoppingCart size={25} />
           </Button>
-          <Button variant="outline-info" onClick={() => setModalShow(true)}>
-            Comment
+          <Button variant="outline-info">
+            <MdFavorite size={25} ba />
           </Button>
         </Card.Body>
       </Card>
-      <ModalView show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 };
