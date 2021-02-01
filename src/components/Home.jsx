@@ -92,7 +92,7 @@ class Home extends Component {
         {error && <Alert variant="danger">{error}</Alert>}
         {loading && (
           <div>
-            <Spinner animation="border" variant="success" />
+            <Spinner animation="border" variant="warning" />
           </div>
         )}
         {booksPreview.length &&
