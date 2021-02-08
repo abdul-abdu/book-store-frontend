@@ -30,7 +30,7 @@ const SingleBook = (props) => {
             <GiShoppingCart size={25} />
           </Button>
           <Button variant="outline-info">
-            <MdFavorite size={25} ba />
+            <MdFavorite size={25} />
           </Button>
         </Card.Body>
       </Card>
