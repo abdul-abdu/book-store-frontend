@@ -53,6 +53,12 @@ export default function BookList(props) {
     refreshList(nextQuery);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      window.onscroll = () => {};
+    };
+  }, []);
+
   return (
     <div>
       <Container style={{ minHeight: "80vh" }}>
