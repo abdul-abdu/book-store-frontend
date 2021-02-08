@@ -2,7 +2,7 @@ import debounce from "lodash.debounce";
 
 const scrollDebounce = (prop) => {
   window.onscroll = debounce(() => {
-    const { error, loading, nextQuery } = prop;
+    const { error, loading, nextQuery, refreshList } = prop;
 
     if (error || loading) return;
 
@@ -10,7 +10,7 @@ const scrollDebounce = (prop) => {
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
     ) {
-      prop.refreshList(nextQuery);
+      refreshList(nextQuery);
     }
   }, 100);
 };
