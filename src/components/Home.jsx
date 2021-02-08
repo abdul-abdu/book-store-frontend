@@ -95,7 +95,7 @@ class Home extends Component {
             <Spinner animation="border" variant="warning" />
           </div>
         )}
-        {booksPreview.length &&
+        {booksPreview.length > 0 &&
           booksPreview.map((booksCategories, idx) => (
             <div className="mb-5" key={idx}>
               <h2 style={{ textAlign: "start" }}>

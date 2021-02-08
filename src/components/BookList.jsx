@@ -50,7 +50,7 @@ export default function BookList(props) {
   ScrollDebounce({ loading, error, nextQuery, refreshList });
 
   useEffect(() => {
-    refreshList();
+    refreshList(nextQuery);
   }, []);
 
   return (
@@ -59,7 +59,7 @@ export default function BookList(props) {
         {error && <Alert variant="danger">{error}</Alert>}
 
         <Row xs={2} sm={2} md={3} lg={4} xl={5}>
-          {books.length &&
+          {books.length > 0 &&
             books.map((book, idx) => {
               return (
                 <Col className="my-2 px-1" key={idx}>

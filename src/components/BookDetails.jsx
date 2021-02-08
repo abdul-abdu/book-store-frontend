@@ -1,4 +1,6 @@
 import BeautyStars from "beauty-stars";
+import { GiShoppingCart } from "react-icons/gi";
+import { MdFavorite } from "react-icons/md";
 
 const { Component } = require("react");
 const {
@@ -165,7 +167,14 @@ class BookInfo extends Component {
                         {bookDetail.category}
                       </div>
                     </div>
-                    <Button variant="warning">Buy Now</Button>
+                    <Button className="mx-2" variant="warning">
+                      <MdFavorite />
+                      Add Favorite
+                    </Button>
+                    <Button className="mx-2" variant="warning">
+                      <GiShoppingCart />
+                      Add Cart
+                    </Button>
                     <div className="comments border-top border-bottom mt-4 pt-2">
                       <Form
                         onSubmit={this.submitForm}
@@ -207,7 +216,7 @@ class BookInfo extends Component {
                       <h4>Comments:</h4>
 
                       {loadingComments ? (
-                        <Spinner animation="border" variant="success" />
+                        <Spinner animation="border" variant="warning" />
                       ) : (
                         comments.map((comment) => <div>comment</div>)
                       )}
