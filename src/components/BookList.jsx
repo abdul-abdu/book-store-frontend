@@ -1,29 +1,40 @@
-import React, { useState, useEffect } from "react";
 import SingleBook from "./SingleBook";
-import ScrollDebounce from "../functions/ScrollDebounce";
+import debounce from "lodash.debounce";
+
 import { Spring } from "react-spring/renderprops";
+import { Component } from "react";
 
 const { Col, Container, Row, Spinner, Alert } = require("react-bootstrap");
 
-export default function BookList(props) {
-  const [error, setError] = useState(null);
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(null);
-  const [nextQuery, setNextQuery] = useState(null);
+class BookList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, books: [], loading: false, nextQuery: null };
 
-  const refreshList = async (query) => {
-    setLoading({ loading: true });
-    const { currentCategory } = props;
+    window.onscroll = debounce(() => {
+      if (this.state.error || this.state.loading) return;
+
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        this.refreshList(this.state.nextQuery);
+      }
+    }, 100);
+  }
+
+  refreshList = async (query) => {
+    this.setState({ loading: true });
+    const { currentCategory } = this.props;
     let url = process.env.REACT_APP_API_URL + "/books";
 
     try {
       let currentQuery = query ? query : "?limit=10&offset=0";
       if (currentCategory !== "all") {
         currentQuery += `&category=${currentCategory}`;
-        setBooks([]);
       }
 
-      if (props.searchQuery) {
+      if (this.props.searchQuery) {
         console.log(this.props.searchQuery);
         currentQuery += `&title=${this.props.searchQuery}`;
       }
@@ -33,57 +44,59 @@ export default function BookList(props) {
       if (request.ok) {
         const { books: newBooks, next } = await request.json();
 
-        setBooks([...books, ...newBooks]);
-        setLoading(false);
-        setNextQuery(next);
+        this.setState({
+          books: [...this.state.books, ...newBooks],
+          nextQuery: next,
+          loading: false,
+        });
+        console.log(this.state.nextQuery);
+        console.log(next);
       } else {
-        setError("Something went wrong. Try to refresh the page");
-        setLoading(false);
+        throw new Error("Something went wrong. Try to refresh the page");
       }
     } catch (error) {
-      setError("Something went wrong. Try to refresh the page");
-      setLoading(false);
+      this.setState({ error: error });
+
       console.log(error);
     }
   };
 
-  ScrollDebounce({ loading, error, nextQuery, refreshList });
+  componentDidMount = () => {
+    this.refreshList();
+  };
 
-  useEffect(() => {
-    refreshList(nextQuery);
-  }, []);
+  componentWillUnmount = () => (window.onscroll = () => {});
 
-  useEffect(() => {
-    return () => {
-      window.onscroll = () => {};
-    };
-  }, []);
+  render() {
+    const { books, error, loading } = this.state;
+    return (
+      <div>
+        <Container style={{ minHeight: "80vh" }}>
+          {error && <Alert variant="danger">{error}</Alert>}
 
-  return (
-    <div>
-      <Container style={{ minHeight: "80vh" }}>
-        {error && <Alert variant="danger">{error}</Alert>}
-
-        <Row xs={2} sm={2} md={3} lg={4} xl={5}>
-          {books.length > 0 &&
-            books.map((book, idx) => {
-              return (
-                <Col className="my-2 px-1" key={idx}>
-                  <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
-                    {(props) => (
-                      <div style={props}>
-                        <SingleBook book={book} />
-                      </div>
-                    )}
-                  </Spring>
-                </Col>
-              );
-            })}
-        </Row>
-        {loading && (
-          <Spinner animation="border" variant="warning" className="mt-5" />
-        )}
-      </Container>
-    </div>
-  );
+          <Row xs={2} sm={2} md={3} lg={4} xl={5}>
+            {books.length > 0 &&
+              books.map((book, idx) => {
+                return (
+                  <Col className="my-2 px-1" key={idx}>
+                    <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                      {(props) => (
+                        <div style={props}>
+                          <SingleBook book={book} />
+                        </div>
+                      )}
+                    </Spring>
+                  </Col>
+                );
+              })}
+          </Row>
+          {loading && (
+            <Spinner animation="border" variant="warning" className="mt-5" />
+          )}
+        </Container>
+      </div>
+    );
+  }
 }
+
+export default BookList;
