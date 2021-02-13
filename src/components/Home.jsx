@@ -29,7 +29,7 @@ class Home extends Component {
       .then((response) => {
         if (response.statusText === "OK") {
           this.setState({ booksPreview: response.data, loading: false });
-          console.log(this.state.booksPreview);
+          // console.log(this.state.booksPreview);
         }
       })
       .catch((err) => {
