@@ -52,10 +52,13 @@ class BookList extends Component {
         console.log(this.state.nextQuery);
         console.log(next);
       } else {
-        throw new Error("Something went wrong. Try to refresh the page");
+        throw new Error();
       }
     } catch (error) {
-      this.setState({ error: error });
+      this.setState({
+        error: error.message,
+        loading: false,
+      });
 
       console.log(error);
     }

@@ -34,7 +34,7 @@ class Home extends Component {
       })
       .catch((err) => {
         this.setState({
-          error: "Something went wrong. Try to refresh the page",
+          error: err.message,
           loading: false,
         });
         console.log("error:", err);
