@@ -5,6 +5,9 @@ import NavBar from "./components/NavBar";
 import BookDetails from "./components/BookDetails";
 import ScrollToTop from "./functions/ScrollToTop";
 import Home from "./components/Home";
+import Register from "./pages/register";
+import Login from "./pages/login";
+
 const { useState } = require("react");
 const { BrowserRouter, Route } = require("react-router-dom");
 
@@ -38,6 +41,9 @@ function App() {
         />
 
         <Route path="/books/:id/details" exact component={BookDetails} />
+
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
         <MyFooter />
       </BrowserRouter>
     </div>

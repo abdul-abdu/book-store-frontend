@@ -63,7 +63,6 @@ const NavBar = (props) => {
               <DropdownButton
                 menuAlign="right"
                 variant="outline-secondary"
-                // className="ml-md-2"
                 id="dropdown-basic-button"
                 title={currentCategory.toUpperCase()}
               >
@@ -84,6 +83,12 @@ const NavBar = (props) => {
               </DropdownButton>
             )}
           </>
+          <Nav.Link as={Link} to="/register">
+            Sign Up
+          </Nav.Link>
+          <Nav.Link as={Link} to="/login">
+            Sign In
+          </Nav.Link>
         </>
       </Container>
     </Navbar>
