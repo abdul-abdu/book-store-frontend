@@ -49,8 +49,6 @@ class BookList extends Component {
           nextQuery: next,
           loading: false,
         });
-        console.log(this.state.nextQuery);
-        console.log(next);
       } else {
         throw new Error();
       }
