@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #577e7b;
   padding-top: 80px;
+  min-height: 100vh;
 }
 
 .slick-arrow {
