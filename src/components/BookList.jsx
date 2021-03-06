@@ -32,6 +32,8 @@ class BookList extends Component {
       let currentQuery = query ? query : "?limit=10&offset=0";
       if (currentCategory !== "all") {
         currentQuery += `&category=${currentCategory}`;
+        console.log("currentQuery", currentQuery);
+        this.setState({ books: [] });
       }
 
       if (this.props.searchQuery) {
@@ -66,6 +68,12 @@ class BookList extends Component {
     this.refreshList();
   };
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.currentCategory !== this.props.currentCategory) {
+      this.refreshList();
+    }
+  };
+
   componentWillUnmount = () => (window.onscroll = () => {});
 
   render() {
@@ -74,6 +82,9 @@ class BookList extends Component {
       <div>
         <Container style={{ minHeight: "80vh" }}>
           {error && <Alert variant="danger">{error}</Alert>}
+          <Alert variant="warning">
+            {this.props.currentCategory.toUpperCase() + " BOOKS"}
+          </Alert>
 
           <Row xs={2} sm={2} md={3} lg={4} xl={5}>
             {books.length > 0 &&
