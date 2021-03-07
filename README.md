@@ -3,3 +3,7 @@
 [Backend here](https://github.com/Abdugaffor-97/book-store-backend)
 
 [SEE DEMO](https://6043fd3dad3d94cb6c0fba5a--zealous-heyrovsky-4e3c4c.netlify.app/)
+
+.env config
+
+- REACT_APP_API_URL=http://localhost:3003
