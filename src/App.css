@@ -1,94 +1,95 @@
 .App {
-  text-align: center;
-  background-color: #577e7b;
-  padding-top: 80px;
-  min-height: 100vh;
+	text-align: center;
+	background-color: #1c1c1c;
+	padding-top: 80px;
+	min-height: 100vh;
+	color: #ffffff;
 }
 
 .slick-arrow {
-  z-index: 10;
+	z-index: 10;
 }
 
 .App nav.navbar {
-  background-color: #282828;
+	background-color: #282828;
 }
 
 /* Cards */
 .App .card {
-  color: white;
-  background-color: #181818;
+	background-color: #171717;
 }
 
 .App .card button {
-  width: 100px;
+	width: 100px;
 }
 
 .App .card .h5 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .card-img-box {
-  height: 200px;
-  overflow: hidden;
+	height: 200px;
+	overflow: hidden;
 }
 
 .card-tex-box {
-  min-height: 120px;
+	min-height: 120px;
 }
 
 /* ******************* MODAL **************** */
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-main {
-  position: fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: fixed;
+	background: white;
+	width: 80%;
+	height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .modal-main button {
-  width: 150px;
+	width: 150px;
 }
 
 .display-block {
-  display: block;
+	display: block;
 }
 
 .display-none {
-  display: none;
+	display: none;
 }
 
 /* SLIDER */
-.slick-arrow {
-  width: 40px;
-}
 
 @media (max-width: 400px) {
-  * {
-    font-size: 12px;
-  }
-  .App .card button {
-    width: 90%;
-    font-size: 1.09rem;
-  }
-  .card-body {
-    padding: 0px 3px 5px 3px;
-  }
+	* {
+		font-size: 12px;
+	}
+	.App .card button {
+		width: 90%;
+		font-size: 1.09rem;
+	}
+	.card-body {
+		padding: 0px 3px 5px 3px;
+	}
 
-  .card-tex-box {
-    min-height: 80px;
-  }
+	.card-tex-box {
+		min-height: 80px;
+	}
+}
+
+.jumbotron {
+	color: #212121;
 }
