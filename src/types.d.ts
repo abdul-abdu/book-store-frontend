@@ -5,8 +5,3 @@ interface IBook {
 	price: number;
 	title: string;
 }
-
-type CategoryContext = {
-	currentCategory: string;
-	setCurrentCategory: (category: string) => void;
-};

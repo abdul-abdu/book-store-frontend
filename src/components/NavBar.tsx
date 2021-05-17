@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	Navbar,
 	Nav,
@@ -11,7 +12,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 
 import { FiShoppingCart } from "react-icons/fi";
-import ScrollProgress from "./ScrollProgress";
+import { ScrollProgress } from ".";
 import { BookCategories, CategoryContext } from "../contexts";
 import { useContext } from "react";
 
@@ -94,4 +95,4 @@ const NavBar = (props: any) => {
 	);
 };
 
-export default NavBar;
+export { NavBar };

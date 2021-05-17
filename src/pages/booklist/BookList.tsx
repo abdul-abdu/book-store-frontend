@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Spring } from "react-spring/renderprops";
-import SingleBook from "../../components/SingleBook";
+import { SingleBook } from "../../components";
 
 import { Col, Row, Spinner, Alert } from "react-bootstrap";
 import { getAllBooks } from "../../httpClient";

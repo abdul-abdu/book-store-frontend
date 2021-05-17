@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import "./App.css";
-import Footer from "./components/Footer";
-import NavBar from "./components/NavBar";
+import React, { useState } from "react";
+import { NavBar, Footer } from "./components";
 import { CategoryContext } from "./contexts";
 import { useScrollToTop } from "./hooks";
 
