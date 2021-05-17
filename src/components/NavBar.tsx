@@ -62,11 +62,12 @@ const NavBar = (props: any) => {
 								menuAlign="right"
 								variant="outline-secondary"
 								id="dropdown-basic-button"
-								title={currentCategory}
+								title={currentCategory.toLocaleUpperCase()}
 							>
 								{BookCategories.map((category, idx) => {
 									return (
 										<Dropdown.Item
+											className="text-capitalize"
 											key={idx}
 											onClick={() => {
 												if (category !== currentCategory) {

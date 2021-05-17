@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
-import MyFooter from "./components/MyFooter";
+import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-import { CategoryContext, InitialBookCategory } from "./contexts";
+import { CategoryContext } from "./contexts";
 import { useScrollToTop } from "./hooks";
 
 import Pages from "./pages";
 
 function App() {
-	const [currentCategory, setCurrentCategory] =
-		useState<string>(InitialBookCategory);
+	const [currentCategory, setCurrentCategory] = useState<string>("all");
 	useScrollToTop(currentCategory);
 
 	return (
@@ -18,7 +17,7 @@ function App() {
 				<NavBar />
 				<Pages />
 			</CategoryContext.Provider>
-			<MyFooter />
+			<Footer />
 		</div>
 	);
 }
