@@ -2,7 +2,7 @@ import React, { ComponentType, ElementType } from "react";
 import { Container } from "react-bootstrap";
 
 interface Props {
-	children: ComponentType | ElementType;
+	children: any;
 }
 
 const DefaultLayout = ({ children }: Props) => (

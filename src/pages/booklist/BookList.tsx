@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Spring } from "react-spring/renderprops";
-import SingleBook from "../../components/SingleBook";
+import { SingleBook } from "../../components";
 
 import { Col, Row, Spinner, Alert } from "react-bootstrap";
 import { getAllBooks } from "../../httpClient";
@@ -92,7 +92,9 @@ const BookList = () => {
 	return (
 		<React.Fragment>
 			{error && <Alert variant="danger">{error}</Alert>}
-			<Alert variant="warning">{currentCategory + " BOOKS"}</Alert>
+			<Alert variant="warning" className="text-uppercase">
+				{currentCategory + " books"}
+			</Alert>
 
 			<Row xs={2} sm={2} md={3} lg={4} xl={5}>
 				{books.length > 0 &&

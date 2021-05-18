@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 
-const SingleBook = (props: any) => {
+const SingleBook = withRouter((props: any) => {
 	const { book, history } = props;
 	return (
 		<Card style={{ maxWidth: "13rem" }}>
@@ -34,6 +34,6 @@ const SingleBook = (props: any) => {
 			</Card.Body>
 		</Card>
 	);
-};
+});
 
-export default withRouter(SingleBook);
+export { SingleBook };
