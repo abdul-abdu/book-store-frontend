@@ -98,8 +98,8 @@ const BookList = () => {
 
 			<Row xs={2} sm={2} md={3} lg={4} xl={5}>
 				{books.length > 0 &&
-					books.map((book, idx) => (
-						<Col className="my-2 px-1" key={idx}>
+					books.map((book: IBook) => (
+						<Col className="my-2 px-1" key={book._id}>
 							<Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
 								{(props) => (
 									<div style={props}>

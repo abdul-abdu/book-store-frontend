@@ -53,8 +53,8 @@ const Home = () => {
 						</h2>
 						<Col>
 							<Slider {...settings}>
-								{booksCategories.map((book: any, idx: number) => (
-									<div className="px-2" key={idx}>
+								{booksCategories.map((book: IBook) => (
+									<div className="px-2" key={book._id}>
 										<Image
 											src={book.img}
 											alt="img"
